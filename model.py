@@ -1,5 +1,6 @@
 import torch
 from torch import nn as nn
+from torch.nn.functional import one_hot
 
 
 class Generator(nn.Module):
@@ -28,18 +29,18 @@ class Generator(nn.Module):
                                    nn.Tanh())
         #output 3*64*64
 
-        self.embedding = nn.Embedding(10,100)
+        #self.embedding = nn.Embedding(10,100)
 
 
     def forward(self,noise,label):
 
-        label_embedding = self.embedding(label)
+        label_embedding = one_hot(label,10)
 
         print(label_embedding.shape)
-        print(label_embedding)
+        #print(label_embedding)
 
-        print(noise.shape)
-        x = torch.cat((noise,label.float()),dim=1)
+        #print(noise.shape)
+        x = torch.cat((noise,label_embedding),dim=1)
 
         x = x.view(-1,110,1,1)
 
