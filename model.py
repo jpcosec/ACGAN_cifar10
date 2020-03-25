@@ -5,11 +5,14 @@ from torch.nn.functional import one_hot
 
 class Generator(nn.Module):
 
-    def __init__(self,z=100):
+    def __init__(self):
         super(Generator,self).__init__()
 
+        self.layer0 = nn.Sequential(nn.Linear(110, 1024, bias=False),
+                                    nn.ReLU(True))
+
         #input 100*1*1
-        self.layer1 = nn.Sequential(nn.ConvTranspose2d(110,512,4,1,0,bias = False),
+        self.layer1 = nn.Sequential(nn.ConvTranspose2d(1024,512,4,1,0,bias = False),
                                    nn.ReLU(True))
 
         #input 512*4*4
@@ -36,14 +39,15 @@ class Generator(nn.Module):
 
         label_embedding = one_hot(label,10)
 
-        print(label_embedding.shape)
+        #print(label_embedding.shape)
         #print(label_embedding)
 
         #print(noise.shape)
-        x = torch.cat((noise,label_embedding),dim=1)
+        x = torch.cat((noise,label_embedding.float()),dim=1)
 
-        x = x.view(-1,110,1,1)
 
+        x = self.layer0(x)
+        x = x.view(-1, 1024, 1, 1)
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
