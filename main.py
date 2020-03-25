@@ -102,8 +102,8 @@ for epoch in range(1,epochs+1):
         D_x = pvalidity.mean().item()        
         
         #fake 
-        noise = torch.randn(batch_size,100,device = device)  
-        sample_labels = torch.randint(0,10,(batch_size,),device = device, dtype = torch.long)
+        noise = torch.randn(batch_size,100,device = device)
+        sample_labels = torch.randint(0,10,(batch_size,),device = device)
         
         fakes = gen(noise,sample_labels)
         

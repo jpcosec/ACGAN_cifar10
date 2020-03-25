@@ -35,7 +35,7 @@ class Generator(nn.Module):
 
         #label_embedding = self.embedding(label)
 
-        x = torch.cat(noise,label,dim=1)
+        x = torch.cat((noise,label),dim=1)
         x = x.view(-1,110,1,1)
 
         x = self.layer1(x)
