@@ -149,11 +149,11 @@ for epoch in range(1,epochs+1):
         D_G_z2 = pvalidity.mean().item()
         
         optimG.step()
+        if idx%20==0:
         
-        
-        print("[{}/{}] [{}/{}] D_x: [{:.4f}] D_G: [{:.4f}/{:.4f}] G_loss: [{:.4f}] D_loss: [{:.4f}] D_label: [{:.4f}] "
-              .format(epoch,epochs, idx, len(trainloader),D_x, D_G_z1,D_G_z2,errG,errD,
-                      errD_real_label + errD_fake_label + errG_label))
+            print("[{}/{}] [{}/{}] D_x: [{:.4f}] D_G: [{:.4f}/{:.4f}] G_loss: [{:.4f}] D_loss: [{:.4f}] D_label: [{:.4f}] "
+                  .format(epoch,epochs, idx, len(trainloader),D_x, D_G_z1,D_G_z2,errG,errD,
+                          errD_real_label + errD_fake_label + errG_label))
         
 
     noise = torch.randn(10,100,device = device)
