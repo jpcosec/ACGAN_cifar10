@@ -103,7 +103,7 @@ for epoch in range(1,epochs+1):
         
         #fake 
         noise = torch.randn(batch_size,100,device = device)
-        sample_labels = torch.randint(0,10,(batch_size,),device = device)
+        sample_labels = torch.randint(0,10,(batch_size,),device = device, dtype = torch.long)
         
         fakes = gen(noise,sample_labels)
         
