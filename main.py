@@ -63,7 +63,7 @@ validity_loss = nn.BCELoss()
 
 real_labels = 0.7 + 0.5 * torch.rand(10, device = device)
 fake_labels = 0.3 * torch.rand(10, device = device)
-epochs = 10
+epochs = 100
 
 for epoch in range(1,epochs+1):
     
