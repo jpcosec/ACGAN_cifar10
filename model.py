@@ -28,14 +28,16 @@ class Generator(nn.Module):
                                    nn.Tanh())
         #output 3*64*64
 
-        #self.embedding = nn.Embedding(10,100)
+        self.embedding = nn.Embedding(10,100)
 
 
     def forward(self,noise,label):
 
-        #label_embedding = self.embedding(label)
+        label_embedding = self.embedding(label)
 
-        print(label.shape)
+        print(label_embedding.shape)
+        print(label_embedding)
+
         print(noise.shape)
         x = torch.cat((noise,label.float()),dim=1)
 
