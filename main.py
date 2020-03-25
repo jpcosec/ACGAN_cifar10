@@ -7,9 +7,12 @@ import torch.nn.functional as F
 import torchvision.transforms as transforms
 
 from model import Generator, Discriminator
-from utils import showImage, weights_init
+from utils import showImage, weights_init, check_folders
+
+check_folders()
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 print(device)
 
 
@@ -152,15 +155,14 @@ for epoch in range(1,epochs+1):
               .format(epoch,epochs, idx, len(trainloader),D_x, D_G_z1,D_G_z2,errG,errD,
                       errD_real_label + errD_fake_label + errG_label))
         
-        
-        if idx % 100 == 0:
-            noise = torch.randn(10,100,device = device)  
-            labels = torch.arange(0,10,dtype = torch.long,device = device)
-            
-            gen_images = gen(noise,labels).detach()
-            
-            showImage(make_grid(gen_images), epoch, idx)
+
+    noise = torch.randn(10,100,device = device)
+    labels = torch.arange(0,10,dtype = torch.long,device = device)
+
+    gen_images = gen(noise,labels).detach()
+
+    showImage(make_grid(gen_images), epoch)
        
     
-    torch.save(gen.state_dict(),'gen.pth')
-    torch.save(disc.state_dict(),'disc.pth')
+    torch.save(gen.state_dict(),'checkpoints/gen_%i.pth'%epoch)
+    torch.save(disc.state_dict(),'checkpoints/disc%i.pth'%epoch)

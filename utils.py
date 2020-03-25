@@ -1,14 +1,25 @@
 import numpy as np
 from matplotlib import pyplot as plt
+import os
 
 
-def showImage(images,epoch=-99, idx = -99):
+def showImage(images,epoch=-99):
+
     images = images.cpu().numpy()
     images = images/2 + 0.5
     plt.imshow(np.transpose(images,axes = (1,2,0)))
     plt.axis('off')
     if epoch!=-99:
-        plt.savefig("e" + str(epoch) + "i" + str(idx) + ".png")
+        plt.savefig("outs/e" + str(epoch) + ".png")
+
+
+def check_folders(folders=["outs","checkpoints"]):
+  #print("Moving to", path)#todo: log
+  for folder in folders:
+    if not os.path.exists(folder):
+      print("Creating", folder)
+      os.mkdir(folder)
+
 
 
 def weights_init(m):
