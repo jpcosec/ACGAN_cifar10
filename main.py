@@ -61,7 +61,7 @@ validity_loss = nn.BCELoss()
 real_labels = 0.7 + 0.5 * torch.rand(10, device = device)
 fake_labels = 0.3 * torch.rand(10, device = device)
 epochs = 10
-"""
+
 for epoch in range(1,epochs+1):
     
     for idx, (images,labels) in enumerate(trainloader):
@@ -162,6 +162,5 @@ for epoch in range(1,epochs+1):
             showImage(make_grid(gen_images), epoch, idx)
        
     
-        torch.save(gen.state_dict(),'gen.pth')
-        torch.save(disc.state_dict(),'disc.pth')
-    """
+    torch.save(gen.state_dict(),'gen.pth')
+    torch.save(disc.state_dict(),'disc.pth')
