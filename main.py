@@ -28,17 +28,16 @@ testset = torchvision.datasets.CIFAR10(root = './data', train = False, download 
 dataset = torch.utils.data.ConcatDataset([trainset, testset])
 
 
-trainloader = torch.utils.data.DataLoader(dataset, batch_size = 100, 
-                                         num_workers = 2, shuffle = True)
+trainloader = torch.utils.data.DataLoader(dataset, batch_size = 100, shuffle = True)
 
 print(len(dataset))
 print(dataset[0][0].size())
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck', 'fake')
 
-#dataiter = iter(trainloader)
-#images,labels = dataiter.next()
-#print(images.size())
-#showImage(make_grid(images[0:64]))
+dataiter = iter(trainloader)
+images,labels = dataiter.next()
+print(images.size())
+showImage(make_grid(images[0:64]))
 
 # custom weights initialization called on netG and netD
 
@@ -68,6 +67,7 @@ for epoch in range(1,epochs+1):
     for idx, (images,labels) in enumerate(trainloader):
         
         batch_size = images.size(0)
+
         labels= labels.to(device)
         images = images.to(device)
         
