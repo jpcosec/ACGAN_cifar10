@@ -65,7 +65,7 @@ epochs = 10
 
 for epoch in range(1,epochs+1):
     
-    for idx, (images,labels) in enumerate(trainloader,0):
+    for idx, (images,labels) in enumerate(trainloader):
         
         batch_size = images.size(0)
         labels= labels.to(device)
