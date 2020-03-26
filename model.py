@@ -12,7 +12,7 @@ class Generator(nn.Module):
         #                            nn.ReLU(True))
 
         #input 100*1*1
-        self.layer1 = nn.Sequential(nn.ConvTranspose2d(1010,512,4,1,0,bias = False),
+        self.layer1 = nn.Sequential(nn.ConvTranspose2d(110,512,4,1,0,bias = False),
                                    nn.ReLU(True))
 
         #input 512*4*4
