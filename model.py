@@ -8,11 +8,13 @@ class Generator(nn.Module):
     def __init__(self):
         super(Generator,self).__init__()
 
-        #self.layer0 = nn.Sequential(nn.Linear(110, 1024, bias=False),
-        #                            nn.ReLU(True))
+        self.layer0 = nn.Sequential(nn.Linear(110, 1024, bias=False),
+                                    nn.BatchNorm(1024),
+                                    nn.ReLU(True))
 
         #input 100*1*1
-        self.layer1 = nn.Sequential(nn.ConvTranspose2d(110,512,4,1,0,bias = False),
+        self.layer1 = nn.Sequential(nn.ConvTranspose2d(1024,512,4,1,0,bias = False),
+                                    nn.BatchNorm2d(256),
                                    nn.ReLU(True))
 
         #input 512*4*4
@@ -45,9 +47,9 @@ class Generator(nn.Module):
         #print(noise.shape)
         x = torch.cat((noise,label_embedding.float()),dim=1)
 
-        x = x.view(-1, 110, 1, 1)
-        #x = self.layer0(x)
-        #x = x.view(-1, 1024, 1, 1)
+        #x = x.view(-1, 110, 1, 1)
+        x = self.layer0(x)
+        x = x.view(-1, 1024, 1, 1)
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
