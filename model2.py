@@ -38,24 +38,25 @@ class Generator(nn.Module):
                                     nn.ReLU(True))
 
         #input 384,4,4
-        #self.layer1 = nn.Sequential(nn.ConvTranspose2d(1024,512,4,1,0,bias = False),
-        #                            nn.BatchNorm2d(256),
-        #                           nn.ReLU(True))
+        self.layer1 = nn.Sequential(nn.ConvTranspose2d(384,192,5,2,output_padding=1,bias = False),
+                                    nn.BatchNorm2d(394),
+                                   nn.ReLU(True))
 
         #input 384*4*4
-        self.layer2 = nn.Sequential(nn.ConvTranspose2d(512,256,5,2,output_padding=1,bias = False),
+        self.layer2 = nn.Sequential(nn.ConvTranspose2d(192,96,5,2,output_padding=1,bias = False),
                                    nn.BatchNorm2d(256),
                                    nn.ReLU(True))
-        #input 256*8*8
-        self.layer3 = nn.Sequential(nn.ConvTranspose2d(256,128,5,2,output_padding=1,bias = False),
+
+        """#input 256*8*8
+        self.layer3 = nn.Sequential(nn.ConvTranspose2d(96,3,5,2,output_padding=1,bias = False),
                                    nn.BatchNorm2d(128),
                                    nn.ReLU(True))
         #input 128*16*16
-        self.layer4 = nn.Sequential(nn.ConvTranspose2d(128,64,5,2,output_padding=1,bias = False),
+        self.layer4 = nn.Sequential(nn.ConvTranspose2d(96,64,5,2,output_padding=1,bias = False),
                                    nn.BatchNorm2d(64),
-                                   nn.ReLU(True))
+                                   nn.ReLU(True))"""
         #input 64*32*32
-        self.layer5 = nn.Sequential(nn.ConvTranspose2d(64,3,5,2,output_padding=1,bias = False),
+        self.layer5 = nn.Sequential(nn.ConvTranspose2d(96,3,5,2,output_padding=1,bias = False),
                                    nn.Tanh())
         #output 3*64*64
 
@@ -78,10 +79,10 @@ class Generator(nn.Module):
         #x = x.view(-1, 110, 1, 1)
         x = self.layer0(x)
         x = x.view(-1, 384*4*4, 1, 1)
-        #x = self.layer1(x)
+        x = self.layer1(x)
         x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
+        """x = self.layer3(x)
+        x = self.layer4(x)"""
         x = self.layer5(x)
         return x
 
@@ -95,7 +96,7 @@ class Discriminator(nn.Module):
         #self.noise = GaussianNoise()
 
         #input 3*64*64
-        self.layer1 = nn.Sequential(nn.Conv2d(3,64,4,2,1,bias = False),
+        self.layer1 = nn.Sequential(nn.Conv2d(3,16,4,2,1,bias = False),
                                     nn.BatchNorm2d(64),
                                    nn.LeakyReLU(0.2,True),
                                    nn.Dropout2d(0.5))
