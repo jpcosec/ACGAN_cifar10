@@ -25,13 +25,13 @@ trainset = torchvision.datasets.CIFAR10(root = './data', train = True, download 
                                      transform = tf)
 
 
-testset = torchvision.datasets.CIFAR10(root = './data', train = False, download = True,
+#testset = torchvision.datasets.CIFAR10(root = './data', train = False, download = True,
                                     transform = tf)
 
-dataset = torch.utils.data.ConcatDataset([trainset, testset])
+#dataset = torch.utils.data.ConcatDataset([trainset, testset])
 
 
-trainloader = torch.utils.data.DataLoader(dataset, batch_size = 100, shuffle = True)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size = 100, shuffle = True)
 
 print(len(dataset))
 print(dataset[0][0].size())
