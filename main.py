@@ -6,7 +6,7 @@ import torchvision
 import torch.nn.functional as F
 import torchvision.transforms as transforms
 
-from model import Generator, Discriminator
+from model2 import Generator, Discriminator
 from utils import showImage, weights_init, check_folders
 
 check_folders()
@@ -26,15 +26,15 @@ trainset = torchvision.datasets.CIFAR10(root = './data', train = True, download 
 
 
 #testset = torchvision.datasets.CIFAR10(root = './data', train = False, download = True,
-                                    transform = tf)
+#                                    transform = tf)
 
 #dataset = torch.utils.data.ConcatDataset([trainset, testset])
 
 
-trainloader = torch.utils.data.DataLoader(trainset, batch_size = 100, shuffle = True)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size = 128, shuffle = True)
 
-print(len(dataset))
-print(dataset[0][0].size())
+#print(len(dataset))
+#print(dataset[0][0].size())
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck', 'fake')
 
 dataiter = iter(trainloader)
