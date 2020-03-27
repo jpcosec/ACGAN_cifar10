@@ -78,7 +78,7 @@ class Generator(nn.Module):
 
         #x = x.view(-1, 110, 1, 1)
         x = self.layer0(x)
-        x = x.view(-1, 384*4*4, 1, 1)
+        x = x.view(-1, 384, 4, 4)
         x = self.layer1(x)
         x = self.layer2(x)
         """x = self.layer3(x)
