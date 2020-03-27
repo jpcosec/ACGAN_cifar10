@@ -6,7 +6,7 @@ import torchvision
 import torch.nn.functional as F
 import torchvision.transforms as transforms
 
-from model2 import Generator, Discriminator
+from model import Generator, Discriminator
 from utils import showImage, weights_init, check_folders
 
 check_folders()
