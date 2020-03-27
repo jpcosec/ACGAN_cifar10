@@ -9,12 +9,12 @@ class Generator(nn.Module):
         super(Generator,self).__init__()
 
         self.layer0 = nn.Sequential(nn.Linear(110, 1024, bias=False),
-                                    nn.BatchNorm(1024),
+                                    #nn.BatchNorm(1024),
                                     nn.ReLU(True))
 
         #input 100*1*1
         self.layer1 = nn.Sequential(nn.ConvTranspose2d(1024,512,4,1,0,bias = False),
-                                    nn.BatchNorm2d(256),
+                                    nn.BatchNorm2d(512),
                                    nn.ReLU(True))
 
         #input 512*4*4
@@ -83,7 +83,6 @@ class Discriminator(nn.Module):
         self.layer4 = nn.Sequential(nn.Conv2d(256,512,4,2,1,bias = False),
                                     nn.BatchNorm2d(512),
                                    nn.LeakyReLU(0.2,True))
-        
         #input 512*4*4
         self.validity_layer = nn.Sequential(nn.Conv2d(512,1,4,1,0,bias = False),
                                    nn.Sigmoid())

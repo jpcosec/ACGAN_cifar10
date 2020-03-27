@@ -39,12 +39,12 @@ class Generator(nn.Module):
 
         #input 384,4,4
         self.layer1 = nn.Sequential(nn.ConvTranspose2d(384,192,5,2,output_padding=1,bias = False),
-                                    nn.BatchNorm2d(394),
+                                    nn.BatchNorm2d(192),
                                    nn.ReLU(True))
 
         #input 384*4*4
         self.layer2 = nn.Sequential(nn.ConvTranspose2d(192,96,5,2,output_padding=1,bias = False),
-                                   nn.BatchNorm2d(256),
+                                   nn.BatchNorm2d(96),
                                    nn.ReLU(True))
 
         """#input 256*8*8
@@ -96,7 +96,7 @@ class Discriminator(nn.Module):
         #self.noise = GaussianNoise()
 
         #input 3*64*64
-        self.layer1 = nn.Sequential(nn.Conv2d(3,16,4,2,1,bias = False),
+        self.layer1 = nn.Sequential(nn.Conv2d(3,64,4,2,1,bias = False),
                                     nn.BatchNorm2d(64),
                                    nn.LeakyReLU(0.2,True),
                                    nn.Dropout2d(0.5))
