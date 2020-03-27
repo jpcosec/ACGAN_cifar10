@@ -83,6 +83,7 @@ class Discriminator(nn.Module):
         self.layer4 = nn.Sequential(nn.Conv2d(256,512,4,2,1,bias = False),
                                     nn.BatchNorm2d(512),
                                    nn.LeakyReLU(0.2,True))
+
         #input 512*4*4
         self.validity_layer = nn.Sequential(nn.Conv2d(512,1,4,1,0,bias = False),
                                    nn.Sigmoid())
