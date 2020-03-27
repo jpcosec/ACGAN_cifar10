@@ -34,7 +34,7 @@ class Generator(nn.Module):
         super(Generator,self).__init__()
 
         self.layer0 = nn.Sequential(nn.Linear(110, 384*4*4, bias=False),
-                                    nn.BatchNorm(384*4*4),
+                                    #nn.BatchNorm(384*4*4),
                                     nn.ReLU(True))
 
         #input 384,4,4
@@ -92,7 +92,7 @@ class Discriminator(nn.Module):
         super(Discriminator,self).__init__()
 
 
-        self.noise = GaussianNoise()
+        #self.noise = GaussianNoise()
 
         #input 3*64*64
         self.layer1 = nn.Sequential(nn.Conv2d(3,64,4,2,1,bias = False),
@@ -125,7 +125,7 @@ class Discriminator(nn.Module):
 
     def forward(self,x):
 
-        x = self.noise(x)
+        #x = self.noise(x)
 
         x = self.layer1(x)
         x = self.layer2(x)
